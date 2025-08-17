@@ -1,42 +1,366 @@
+/* Terminal Theme CSS */
+:root {
+  --terminal-bg: rgb(1, 1, 39);       /* deep dark purple background */
+  --terminal-text: #d4bfff;     /* soft lavender text */
+  --terminal-border: #8a63d2;   /* purple accent border */
+  --terminal-shadow: #4b2e83;   /* subtle deep purple shadow */
+  --terminal-highlight:white;/* brighter purple highlight */
+  --terminal-muted: #6a4fbf;    /* muted violet for less focus text */
+  --terminal-error: #ff4d6d;    /* reddish-pink error */
+  --terminal-warning: #ffcc66;  /* warm amber warning */
+  --terminal-info: #5bc0de;     /* cyan info (keeps contrast) */
+}
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--terminal-bg);
+  color: var(--terminal-text);
+  font-family: 'Courier New', 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  max-width: 100%;
+  margin: 0;
+  padding: 1rem;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* Terminal Header */
+.terminal-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  border: 2px solid var(--terminal-border);
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--terminal-bg), #1a1a1a);
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
 }
 
-@keyframes logo-spin {
+.terminal-header h1 {
+  margin: 0;
+  font-size: 2rem;
+  text-shadow: 0 0 10px var(--terminal-text);
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 10px var(--terminal-text); }
+  to { text-shadow: 0 0 20px var(--terminal-text), 0 0 30px var(--terminal-text); }
+}
+
+/* Main Container */
+.terminal-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin: 0 auto;
+}
+
+/* Editor Section */
+#editor {
+  width: 100%;
+  height: 300px;
+  padding: 1rem;
+  background-color: var(--terminal-bg);
+  color: var(--terminal-text);
+  border: 2px solid var(--terminal-border);
+  border-radius: 8px;
+  font-family: 'Courier New', 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 14px;
+  line-height: 1.4;
+  resize: vertical;
+  outline: none;
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+#editor:focus {
+  border-color: var(--terminal-highlight);
+  box-shadow: 0 0 25px rgba(0, 255, 0, 0.4);
+}
+
+#editor::placeholder {
+  color: var(--terminal-muted);
+}
+
+/* Preview Section */
+#preview {
+  text-align: left;
+  padding: 1.5rem;
+  background-color: var(--terminal-bg);
+  border: 2px solid var(--terminal-border);
+  border-radius: 8px;
+  min-height: 300px;
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+/* Markdown Preview Styling */
+#preview h1 {
+  color: var(--terminal-highlight);
+  border-bottom: 2px solid var(--terminal-border);
+  padding-bottom: 0.5rem;
+  margin-top: 0;
+  font-size: 1.8rem;
+  text-shadow: 0 0 5px var(--terminal-highlight);
+}
+
+#preview h2 {
+  color: var(--terminal-highlight);
+  border-bottom: 1px solid var(--terminal-border);
+  padding-bottom: 0.3rem;
+  font-size: 1.5rem;
+}
+
+#preview h3 {
+  color: var(--terminal-highlight);
+  font-size: 1.3rem;
+}
+
+#preview h4, #preview h5, #preview h6 {
+  color: var(--terminal-highlight);
+}
+
+#preview p {
+  margin: 1rem 0;
+  line-height: 1.6;
+}
+
+#preview code {
+  background-color: #1a1a1a;
+  color: var(--terminal-warning);
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  font-family: 'Courier New', 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  border: 1px solid var(--terminal-border);
+}
+
+#preview pre {
+  background-color: #1a1a1a;
+  padding: 1rem;
+  border-radius: 5px;
+  overflow-x: auto;
+  border: 1px solid var(--terminal-border);
+  margin: 1rem 0;
+}
+
+#preview pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--terminal-warning);
+}
+
+#preview blockquote {
+  border-left: 4px solid var(--terminal-border);
+  margin: 1rem 0;
+  padding-left: 1rem;
+  color: var(--terminal-muted);
+  font-style: italic;
+}
+
+#preview table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1rem 0;
+  border: 1px solid var(--terminal-border);
+}
+
+#preview th, #preview td {
+  border: 1px solid var(--terminal-border);
+  padding: 0.5rem;
+  text-align: left;
+}
+
+#preview th {
+  background-color: #1a1a1a;
+  color: var(--terminal-highlight);
+  font-weight: bold;
+}
+
+#preview td {
+  background-color: var(--terminal-bg);
+}
+
+#preview img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid var(--terminal-border);
+  border-radius: 4px;
+}
+
+#preview ul, #preview ol {
+  padding-left: 2rem;
+  margin: 1rem 0;
+}
+
+#preview li {
+  margin: 0.5rem 0;
+}
+
+#preview a {
+  color: var(--terminal-info);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--terminal-info);
+  transition: all 0.3s ease;
+}
+
+#preview a:hover {
+  color: var(--terminal-highlight);
+  border-bottom: 1px solid var(--terminal-highlight);
+  text-shadow: 0 0 5px var(--terminal-highlight);
+}
+
+#preview strong {
+  color: var(--terminal-warning);
+  font-weight: bold;
+}
+
+#preview em {
+  color: var(--terminal-muted);
+  font-style: italic;
+}
+
+#preview del {
+  color: var(--terminal-error);
+  text-decoration: line-through;
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+  .terminal-container {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  
+  #editor {
+    flex: 1;
+    height: 500px;
+  }
+  
+  #preview {
+    flex: 1;
+    min-height: 500px;
+    overflow-y: scroll;
+  }
+  
+  .terminal-header h1 {
+    font-size: 2.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  #root {
+    padding: 2rem;
+  }
+  
+  .terminal-container {
+    gap: 3rem;
+  }
+  
+  #editor, #preview {
+    height: 600px;
+    min-height: 600px;
+  }
+}
+
+@media (max-width: 767px) {
+  #root {
+    padding: 0.5rem;
+  }
+  
+  .terminal-header {
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+  }
+  
+  .terminal-header h1 {
+    font-size: 1.5rem;
+  }
+  
+  .terminal-container {
+    gap: 1rem;
+  }
+  
+  #editor, #preview {
+    height: 250px;
+    min-height: 250px;
+    padding: 0.75rem;
+  }
+  
+  #preview {
+    font-size: 14px;
+    overflow-y: scroll;
+  }
+  
+  #preview h1 {
+    font-size: 1.5rem;
+  }
+  
+  #preview h2 {
+    font-size: 1.3rem;
+  }
+  
+  #preview h3 {
+    font-size: 1.1rem;
+  }
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--terminal-bg);
+  border: 1px solid var(--terminal-border);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--terminal-border);
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--terminal-highlight);
+}
+
+/* Selection Styling */
+::selection {
+  background-color: var(--terminal-highlight);
+  color: var(--terminal-bg);
+}
+
+::-moz-selection {
+  background-color: var(--terminal-highlight);
+  color: var(--terminal-bg);
+}
+
+/* Focus Styles */
+*:focus {
+  outline: 2px solid var(--terminal-highlight);
+  outline-offset: 2px;
+}
+
+/* Animation for terminal startup */
+.terminal-container {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
   from {
-    transform: rotate(0deg);
+    opacity: 0;
+    transform: translateY(20px);
   }
   to {
-    transform: rotate(360deg);
+    opacity: 1;
+    transform: translateY(0);
   }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
 }
